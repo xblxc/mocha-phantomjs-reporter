@@ -3,7 +3,8 @@ var colour = require('colour');
 
 colour.setTheme({
   checkmark: 'green',
-  fail: 'red'
+  fail: 'red',
+  success: 'green bold'
 });
 
 page.onError = function(msg, trace) {

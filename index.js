@@ -12,7 +12,6 @@
     function log() {
 
         var args = Array.apply(null, arguments);
-
         if (window.callPhantom) {
             window.callPhantom(args);
         } else {
@@ -47,16 +46,16 @@
 
             stats.passes++;
             //in most case, we don't it
-            //if ('fast' == test.speed) {
-                //out.push([ color('checkmark', '  ✓ '), color('grey', test.title), "\n" ]);
-            //} else {
-                //out.push([
-                    //color('checkmark', '  ✓ '),
-                    //test.title,
-                    //color('yellow', test.duration + "ms"),
-                    //'\n'
-                //]);
-            //}
+            if ('fast' == test.speed) {
+                out.push([ color('checkmark', '  ✓ '), color('grey', test.title), "\n" ]);
+            } else {
+                out.push([
+                    color('checkmark', '  ✓ '),
+                    test.title,
+                    color('yellow', test.duration + "ms"),
+                    '\n'
+                ]);
+            }
 
         });
 
@@ -70,7 +69,9 @@
             stats.duration = new Date() - stats.start;
 
             out.push([stats.tests, "tests ran in", stats.duration, " ms"]);
-            out.push([ color('checkmark', stats.passes + " passed"), "and", color('fail', stats.failures + " failed")]);
+            stats.failures
+              ? out.push([ color('checkmark', stats.passes + " passed"), "and", color('fail', stats.failures + " failed")])
+              : out.push([ '\n', color('success', '  Test Success ✓✓  ')]);
             out.push(['\n']);
 
             while (out.length) {
@@ -93,4 +94,5 @@
     });
 
 }());
+
 
