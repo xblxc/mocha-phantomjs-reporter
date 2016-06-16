@@ -45,10 +45,10 @@ page.onCallback = function(data) {
 }
 page.open('index.html', function(status){
   if(status){
-    page.injectJs('node_modules/mocha/mocha.js');
-    page.injectJs('reporters/log.js');
-    page.injectJs('node_modules/chai/chai.js');
-    page.injectJs('index.js');
+    page.injectJs('../node_modules/mocha/mocha.js');
+    page.injectJs('../index.js'); //reporter
+    page.injectJs('../node_modules/chai/chai.js');
+    page.injectJs('index.js'); //test
     page.evaluateJavaScript('function(){ mocha.run() }');
   }else{
     console.error('open index.html failed');

@@ -34,7 +34,7 @@
 
         runner.on('suite', function(suite) {
             stats.suites++;
-            out.push([color('yellow', suite.title), '\n']);
+            out.push([color('yellow', suite.title)]);
         });
 
         runner.on('test', function(test) {
@@ -47,13 +47,12 @@
             stats.passes++;
             //in most case, we don't it
             if ('fast' == test.speed) {
-                out.push([ color('checkmark', '  ✓ '), color('grey', test.title), "\n" ]);
+                out.push([ color('checkmark', '  ✓ '), color('grey', test.title)]);
             } else {
                 out.push([
                     color('checkmark', '  ✓ '),
                     test.title,
-                    color('yellow', test.duration + "ms"),
-                    '\n'
+                    color('yellow', test.duration + "ms")
                 ]);
             }
 
@@ -71,7 +70,7 @@
             out.push([stats.tests, "tests ran in", stats.duration, " ms"]);
             stats.failures
               ? out.push([ color('checkmark', stats.passes + " passed"), "and", color('fail', stats.failures + " failed")])
-              : out.push([ '\n', color('success', '  Test Success ✓✓  ')]);
+              : out.push([ '\n', stats.passes == stats.tests && stats.suites ? color('success', '  Test Success ✓✓  ') : color('fail', '  Test Fail ××  ')]);
             out.push(['\n']);
 
             while (out.length) {
@@ -94,5 +93,6 @@
     });
 
 }());
+
 
 

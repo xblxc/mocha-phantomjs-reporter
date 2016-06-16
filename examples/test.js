@@ -16,6 +16,7 @@ page.onError = function(msg, trace) {
     });
   }
   console.error(msgStack.join('\n'));
+  phantom.exit();
 };
 
 page.onCallback = function(data) {
